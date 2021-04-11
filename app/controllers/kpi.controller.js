@@ -1,4 +1,4 @@
-const db = require('../models');
+const db = require('../../models');
 const KPI = db.kpis;
 const Field = db.fields;
 const Op = db.Sequelize.Op;
@@ -14,7 +14,7 @@ exports.create = async (req, res) => {
   }
 
   // Get updated fields
-  const fields = updateKPIFields(req);
+  const fields = await updateKPIFields(req);
 
   // Create a KPI
   const kpi = req.body.kpi;
@@ -68,7 +68,7 @@ exports.update = async (req, res) => {
   const id = req.params.kpi.id;
 
   // Get updated fields
-  const fields = this.updateKPIFields(req);
+  const fields = await updateKPIFields(req);
 
   KPI.update(req.body.kpi, {
     where: { id: id },
@@ -169,7 +169,7 @@ const updateKPIFields = async (req) => {
       (searchingField) => searchingField.id === field.id
     );
 
-    field.KPIField = {
+    field.kpi_field = {
       value: requestedField.value,
     };
   }

@@ -11,7 +11,7 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
      */
-    return await queryInterface.bulkInsert('Fields', [
+    return await queryInterface.bulkInsert('fields', [
       {
         title: 'Identificador',
         description: 'Identificador del KPI',
@@ -19,6 +19,8 @@ module.exports = {
         type: 'text',
         values: null,
         maxlength: 20,
+        createdAt: new Date(),
+        updatedAt: new Date(),
       },
       {
         title: 'Área del Gobierno',
@@ -27,6 +29,8 @@ module.exports = {
         type: 'textarea',
         values: null,
         maxlength: null,
+        createdAt: new Date(),
+        updatedAt: new Date(),
       },
     ]);
   },
