@@ -1,4 +1,4 @@
-module.exports = (app) => {
+module.exports = app => {
   const kpis = require('../controllers/kpi.controller.js');
 
   var router = require('express').Router();
@@ -17,6 +17,12 @@ module.exports = (app) => {
 
   // Update a KPI with id
   router.put('/:id', kpis.update);
+
+  // Disable a KPI with id
+  router.put('/:id/disable', kpis.disable);
+
+  // Enable a KPI with id
+  router.put('/:id/enable', kpis.enable);
 
   // // Delete a KPI with id
   // router.delete('/:id', kpis.delete);
