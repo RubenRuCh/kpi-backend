@@ -24,16 +24,11 @@ db.sequelize.sync(); // Production
 
 // simple route
 app.get('/', (req, res) => {
-  res.json({ message: 'Welcome to KPI application.' });
+  res.json({ message: 'Welcome to KPI application' });
 });
 
 // Include routes
 require('./app/routes/kpi.routes')(app); // KPI routes
 require('./app/routes/field.routes')(app); // Field routes
-// require('./app/routes/kpi_field.routes')(app); // KPIField routes
 
-// set port, listen for requests
-const PORT = process.env.PORT || 8080;
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}.`);
-});
+module.exports = app;

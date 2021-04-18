@@ -28,7 +28,7 @@ exports.create = async (req, res) => {
     const createdKpi = await KPI.create(kpi);
     createdKpi.setFields(fields);
 
-    res.status(200).send(createdKpi);
+    res.status(201).send(createdKpi);
   } catch (err) {
     res.status(500).send({
       message: err.message || 'Some error occurred while creating the KPI.'
