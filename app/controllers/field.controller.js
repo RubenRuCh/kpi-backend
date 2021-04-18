@@ -25,7 +25,7 @@ exports.create = (req, res) => {
   // Save Field in the database
   Field.create(field, { isNewRecord: true })
     .then(data => {
-      res.send(data);
+      res.status(200).send(data);
     })
     .catch(err => {
       res.status(500).send({
@@ -41,7 +41,7 @@ exports.findAll = (req, res) => {
 
   Field.findAll({ where: condition })
     .then(data => {
-      res.send(data);
+      res.status(200).send(data);
     })
     .catch(err => {
       res.status(500).send({
@@ -84,11 +84,11 @@ exports.update = (req, res) => {
   })
     .then(num => {
       if (num == 1) {
-        res.send({
+        res.status(200).send({
           message: 'Field was updated successfully.'
         });
       } else {
-        res.send({
+        res.status(404).send({
           message: `Cannot update Field with id=${id}. Maybe Field was not found or req.body is empty!`
         });
       }
