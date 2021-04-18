@@ -25,7 +25,7 @@ exports.create = (req, res) => {
   // Save Field in the database
   Field.create(field, { isNewRecord: true })
     .then(data => {
-      res.status(200).send(data);
+      res.status(201).send(data);
     })
     .catch(err => {
       res.status(500).send({
