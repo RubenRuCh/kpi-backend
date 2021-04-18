@@ -28,7 +28,7 @@ exports.create = async (req, res) => {
     const createdKpi = await KPI.create(kpi);
     createdKpi.setFields(fields);
 
-    res.send(createdKpi);
+    res.status(200).send(createdKpi);
   } catch (err) {
     res.status(500).send({
       message: err.message || 'Some error occurred while creating the KPI.'
@@ -43,7 +43,7 @@ exports.findAll = (req, res) => {
 
   KPI.findAll({ include: [{ model: Field }], where: condition })
     .then(data => {
-      res.send(data);
+      res.status(200).send(data);
     })
     .catch(err => {
       res.status(500).send({
@@ -58,7 +58,7 @@ exports.findOne = (req, res) => {
 
   KPI.findByPk(id)
     .then(data => {
-      res.send(data);
+      res.status(200).send(data);
     })
     .catch(err => {
       res.status(500).send({
@@ -87,11 +87,11 @@ exports.update = async (req, res) => {
 
         updateKpi();
 
-        res.send({
+        res.status(200).send({
           message: 'KPI was updated successfully.'
         });
       } else {
-        res.send({
+        res.status(404).send({
           message: `Cannot update KPI with id=${id}. Maybe KPI was not found or req.body is empty!`
         });
       }
@@ -115,11 +115,11 @@ exports.disable = async (req, res) => {
   )
     .then(num => {
       if (num == 1) {
-        res.send({
+        res.status(200).send({
           message: 'KPI was disabled successfully.'
         });
       } else {
-        res.send({
+        res.status(404).send({
           message: `Cannot disable KPI with id=${id}. Maybe KPI was not found or req.body is empty!`
         });
       }
@@ -143,11 +143,11 @@ exports.enable = async (req, res) => {
   )
     .then(num => {
       if (num == 1) {
-        res.send({
+        res.status(200).send({
           message: 'KPI was enabled successfully.'
         });
       } else {
-        res.send({
+        res.status(404).send({
           message: `Cannot enable KPI with id=${id}. Maybe KPI was not found or req.body is empty!`
         });
       }
@@ -203,7 +203,7 @@ exports.enable = async (req, res) => {
 exports.findAllEnabled = (req, res) => {
   KPI.findAll({ where: { enabled: true } })
     .then(data => {
-      res.send(data);
+      res.status(200).send(data);
     })
     .catch(err => {
       res.status(500).send({
