@@ -17,6 +17,7 @@ exports.create = (req, res) => {
     title: req.body.title,
     description: req.body.description,
     required: req.body.required ? req.body.required : false,
+    fillable: req.body.fillable ? req.body.fillable : false,
     type: req.body.type,
     values: req.body.values,
     maxlength: req.body.maxlength
@@ -74,6 +75,7 @@ exports.update = (req, res) => {
     title: req.body.title,
     description: req.body.description,
     required: req.body.required ? req.body.required : false,
+    fillable: req.body.fillable ? req.body.fillable : false,
     type: req.body.type,
     values: req.body.values,
     maxlength: req.body.maxlength

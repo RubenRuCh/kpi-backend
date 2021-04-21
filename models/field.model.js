@@ -1,23 +1,26 @@
 module.exports = (sequelize, Sequelize) => {
   const Field = sequelize.define('field', {
     title: {
-      type: Sequelize.STRING,
+      type: Sequelize.STRING
     },
     description: {
-      type: Sequelize.TEXT,
+      type: Sequelize.TEXT
     },
     required: {
-      type: Sequelize.BOOLEAN,
+      type: Sequelize.BOOLEAN
+    },
+    fillable: {
+      type: Sequelize.BOOLEAN
     },
     type: {
-      type: Sequelize.STRING,
+      type: Sequelize.STRING
     },
     values: {
-      type: Sequelize.ARRAY(Sequelize.STRING), // Only available in postgres
+      type: Sequelize.ARRAY(Sequelize.STRING) // Only available in postgres
     },
     maxlength: {
-      type: Sequelize.INTEGER,
-    },
+      type: Sequelize.INTEGER
+    }
   });
 
   return Field;
