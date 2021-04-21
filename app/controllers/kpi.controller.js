@@ -56,7 +56,9 @@ exports.findAll = (req, res) => {
 exports.findOne = (req, res) => {
   const id = req.params.id;
 
-  KPI.findByPk(id)
+  KPI.findByPk(id, {
+    include: [{ model: Field }]
+  })
     .then(data => {
       res.status(200).send(data);
     })
