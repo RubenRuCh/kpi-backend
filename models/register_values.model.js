@@ -1,15 +1,15 @@
 module.exports = (sequelize, Sequelize) => {
-  const KPIField = sequelize.define('kpi_field', {
+  const RegisterValue = sequelize.define('register_value', {
     id: {
       type: Sequelize.INTEGER,
       primaryKey: true,
       autoIncrement: true,
       allowNull: false,
     },
-    value: {
+    value_label: {
       type: Sequelize.STRING,
     },
   });
 
-  return KPIField;
+  return RegisterValue;
 };

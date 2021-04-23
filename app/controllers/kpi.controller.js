@@ -6,9 +6,10 @@ const Op = db.Sequelize.Op;
 // Create and Save a new KPI
 exports.create = async (req, res) => {
   // Validate request
+  console.log(req.body);
   if (!req.body.title) {
     res.status(400).send({
-      message: 'Content cannot be empty!'
+      message: 'Content cannot be empty!',
     });
     return;
   }
@@ -20,7 +21,7 @@ exports.create = async (req, res) => {
   const kpi = {
     title: req.body.title,
     description: req.body.description,
-    enabled: req.body.enabled
+    enabled: req.body.enabled,
   };
 
   // Save KPI in the database
@@ -31,7 +32,7 @@ exports.create = async (req, res) => {
     res.status(201).send(createdKpi);
   } catch (err) {
     res.status(500).send({
-      message: err.message || 'Some error occurred while creating the KPI.'
+      message: err.message || 'Some error occurred while creating the KPI.',
     });
   }
 };
@@ -42,12 +43,12 @@ exports.findAll = (req, res) => {
   var condition = title ? { title: { [Op.iLike]: `%${title}%` } } : null;
 
   KPI.findAll({ include: [{ model: Field }], where: condition })
-    .then(data => {
+    .then((data) => {
       res.status(200).send(data);
     })
-    .catch(err => {
+    .catch((err) => {
       res.status(500).send({
-        message: err.message || 'Some error occurred while retrieving kpis.'
+        message: err.message || 'Some error occurred while retrieving kpis.',
       });
     });
 };
@@ -56,15 +57,13 @@ exports.findAll = (req, res) => {
 exports.findOne = (req, res) => {
   const id = req.params.id;
 
-  KPI.findByPk(id, {
-    include: [{ model: Field }]
-  })
-    .then(data => {
+  KPI.findByPk(id)
+    .then((data) => {
       res.status(200).send(data);
     })
-    .catch(err => {
+    .catch((err) => {
       res.status(500).send({
-        message: 'Error retrieving KPI with id=' + id
+        message: 'Error retrieving KPI with id=' + id,
       });
     });
 };
@@ -77,9 +76,9 @@ exports.update = async (req, res) => {
   const fields = await updateKPIFields(req);
 
   KPI.update(req.body, {
-    where: { id: id }
+    where: { id: id },
   })
-    .then(num => {
+    .then((num) => {
       if (num == 1) {
         // Update fields if update KPI was successful
         const updateKpi = async () => {
@@ -90,17 +89,17 @@ exports.update = async (req, res) => {
         updateKpi();
 
         res.status(200).send({
-          message: 'KPI was updated successfully.'
+          message: 'KPI was updated successfully.',
         });
       } else {
         res.status(404).send({
-          message: `Cannot update KPI with id=${id}. Maybe KPI was not found or req.body is empty!`
+          message: `Cannot update KPI with id=${id}. Maybe KPI was not found or req.body is empty!`,
         });
       }
     })
-    .catch(err => {
+    .catch((err) => {
       res.status(500).send({
-        message: 'Error updating KPI with id=' + id
+        message: 'Error updating KPI with id=' + id,
       });
     });
 };
@@ -112,23 +111,23 @@ exports.disable = async (req, res) => {
   KPI.update(
     { enabled: false },
     {
-      where: { id: id }
+      where: { id: id },
     }
   )
-    .then(num => {
+    .then((num) => {
       if (num == 1) {
         res.status(200).send({
-          message: 'KPI was disabled successfully.'
+          message: 'KPI was disabled successfully.',
         });
       } else {
         res.status(404).send({
-          message: `Cannot disable KPI with id=${id}. Maybe KPI was not found or req.body is empty!`
+          message: `Cannot disable KPI with id=${id}. Maybe KPI was not found or req.body is empty!`,
         });
       }
     })
-    .catch(err => {
+    .catch((err) => {
       res.status(500).send({
-        message: 'Error disabling KPI with id=' + id
+        message: 'Error disabling KPI with id=' + id,
       });
     });
 };
@@ -140,23 +139,23 @@ exports.enable = async (req, res) => {
   KPI.update(
     { enabled: true },
     {
-      where: { id: id }
+      where: { id: id },
     }
   )
-    .then(num => {
+    .then((num) => {
       if (num == 1) {
         res.status(200).send({
-          message: 'KPI was enabled successfully.'
+          message: 'KPI was enabled successfully.',
         });
       } else {
         res.status(404).send({
-          message: `Cannot enable KPI with id=${id}. Maybe KPI was not found or req.body is empty!`
+          message: `Cannot enable KPI with id=${id}. Maybe KPI was not found or req.body is empty!`,
         });
       }
     })
-    .catch(err => {
+    .catch((err) => {
       res.status(500).send({
-        message: 'Error enabling KPI with id=' + id
+        message: 'Error enabling KPI with id=' + id,
       });
     });
 };
@@ -204,34 +203,34 @@ exports.enable = async (req, res) => {
 // Find all enabled KPIs
 exports.findAllEnabled = (req, res) => {
   KPI.findAll({ where: { enabled: true } })
-    .then(data => {
+    .then((data) => {
       res.status(200).send(data);
     })
-    .catch(err => {
+    .catch((err) => {
       res.status(500).send({
-        message: err.message || 'Some error occurred while retrieving kpis.'
+        message: err.message || 'Some error occurred while retrieving kpis.',
       });
     });
 };
 
-const updateKPIFields = async req => {
+const updateKPIFields = async (req) => {
   // Get all fields that we wanna include in this KPI
   const requestedFields = req.body.fields;
 
   const fields = await Field.findAll({
     where: {
-      id: requestedFields.map(field => field.id)
-    }
+      id: requestedFields.map((field) => field.id),
+    },
   });
 
   // Add values to KPIFields before adding them to the new KPI
   for (const field of fields) {
     const requestedField = requestedFields.find(
-      searchingField => searchingField.id === field.id
+      (searchingField) => searchingField.id === field.id
     );
 
     field.kpi_field = {
-      value: requestedField.value
+      value: requestedField.value,
     };
   }
 

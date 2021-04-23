@@ -5,7 +5,7 @@ const db = require('./models');
 const app = express();
 
 var corsOptions = {
-  origin: 'http://localhost:8081'
+  origin: 'http://localhost:8081',
 };
 
 app.use(cors(corsOptions));
@@ -18,9 +18,9 @@ app.use(express.urlencoded());
 
 db.sequelize.sync(); // Production
 
-// db.sequelize.sync({ force: true }).then(() => {
+//   db.sequelize.sync({ force: true }).then(() => {
 //   console.log('Drop and re-sync db');
-// }); // Develop
+//  }); // Develop
 
 // simple route
 app.get('/', (req, res) => {
@@ -30,5 +30,6 @@ app.get('/', (req, res) => {
 // Include routes
 require('./app/routes/kpi.routes')(app); // KPI routes
 require('./app/routes/field.routes')(app); // Field routes
+require('./app/routes/register.routes')(app); // Register routes
 
 module.exports = app;

@@ -9,8 +9,8 @@ const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
     max: dbConfig.pool.max,
     min: dbConfig.pool.min,
     acquire: dbConfig.pool.acquire,
-    idle: dbConfig.pool.idle
-  }
+    idle: dbConfig.pool.idle,
+  },
 });
 
 const db = {};
@@ -29,5 +29,14 @@ db.kpiFields = require('./kpi_field.model.js')(sequelize, Sequelize);
 
 db.kpis.belongsToMany(db.fields, { through: db.kpiFields }); // kpiId
 db.fields.belongsToMany(db.kpis, { through: db.kpiFields }); // fieldId
+
+// Register
+db.registers = require('./register.model.js')(sequelize, Sequelize);
+
+// RegisterValues
+db.registerValues = require('./register_values.model.js')(sequelize, Sequelize);
+
+db.registers.belongsToMany(db.kpiFields, { through: db.registerValues }); // registerId
+db.kpiFields.belongsToMany(db.registers, { through: db.registerValues }); // kpiFieldId
 
 module.exports = db;

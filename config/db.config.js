@@ -1,7 +1,7 @@
 module.exports = {
   HOST: 'localhost',
   USER: 'postgres',
-  PASSWORD: '123456',
+  PASSWORD: '1234',
   DB:
     process.env.NODE_ENV == 'test'
       ? 'kpis_management_test'
