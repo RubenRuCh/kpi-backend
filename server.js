@@ -30,5 +30,6 @@ app.get('/', (req, res) => {
 // Include routes
 require('./app/routes/kpi.routes')(app); // KPI routes
 require('./app/routes/field.routes')(app); // Field routes
+require('./app/routes/register.routes')(app); // Register routes
 
 module.exports = app;
