@@ -17,21 +17,21 @@ exports.login = async (req, res) => {
       url: ldapConfig.URL
       // tlsOptions: { rejectUnauthorized: false }
     },
-    userDn: `uid=${req.body.user},${ldapConfig.DC}`,
+    adminDn: `cn=${ldapConfig.ADMIN},${ldapConfig.DC}`,
+    adminPassword: ldapConfig.ADMIN_PASSWD,
+    userDn: `${ldapConfig.SEARCH_BY}=${req.body.user},${ldapConfig.DC}`,
     userPassword: req.body.password,
-    userSearchBase: `${ldapConfig.GROUP},${ldapConfig.DC}`,
-    usernameAttribute: 'uid',
+    userSearchBase: `${ldapConfig.DC}`,
+    usernameAttribute: ldapConfig.SEARCH_BY,
     username: req.body.user
     // starttls: false
   };
 
   // Connect to LDAP service and return result
-
   try {
     const user = await authenticate(options);
     res.status(200).send(user);
   } catch (err) {
-    console.log('ERROR ', err);
     res.status(401).send({
       message: err.message || 'Some error occurred while login with LDAP'
     });
