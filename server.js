@@ -28,6 +28,7 @@ app.get('/', (req, res) => {
 });
 
 // Include routes
+require('./app/routes/auth.routes')(app); // Auth routes
 require('./app/routes/kpi.routes')(app); // KPI routes
 require('./app/routes/field.routes')(app); // Field routes
 

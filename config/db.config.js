@@ -3,8 +3,8 @@ module.exports = {
   USER: 'postgres',
   PASSWORD: '123456',
   DB:
-    process.env.NODE_ENV == 'test'
-      ? 'kpis_management_test'
+    process.env.NODE_ENV == 'production'
+      ? 'kpis_management_production'
       : 'kpis_management_dev',
   dialect: 'postgres',
   pool: {
