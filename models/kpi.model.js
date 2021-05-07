@@ -9,6 +9,9 @@ module.exports = (sequelize, Sequelize) => {
     enabled: {
       type: Sequelize.BOOLEAN,
     },
+    service: {
+      type: Sequelize.TEXT,
+    }
   });
 
   return KPI;
