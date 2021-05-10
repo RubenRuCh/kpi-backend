@@ -13,7 +13,7 @@ module.exports = (sequelize, Sequelize) => {
       role: {
         type: Sequelize.STRING,
       },
-      subrole: {
+      service: {
         type: Sequelize.TEXT,
       }
     });

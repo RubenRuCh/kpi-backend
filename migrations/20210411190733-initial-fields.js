@@ -1,5 +1,7 @@
 'use strict';
 
+const { Sequelize } = require("sequelize");
+
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     /**
@@ -19,6 +21,16 @@ module.exports = {
         type: 'text',
         values: null,
         maxlength: 20,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        title: 'Servicio',
+        description: 'Servicio del KPI',
+        required: true,
+        type: 'text',
+        values: ['Agua', 'Poblacion', 'Alumbrado'],
+        maxlength: null,
         createdAt: new Date(),
         updatedAt: new Date(),
       },
@@ -44,4 +56,15 @@ module.exports = {
      */
     return await queryInterface.bulkDelete('Fields', null, {});
   },
+
+  /*down: async (queryInterface, Sequelize) => {
+    /**
+     * Add commands to revert seed here.
+     *
+     * Example:
+     * await queryInterface.bulkDelete('People', null, {});
+     *
+    return await queryInterface.bulkDelete('Fields', null, {});
+  },*/
+
 };

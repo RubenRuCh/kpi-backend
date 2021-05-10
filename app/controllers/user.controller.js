@@ -12,7 +12,6 @@ exports.create = async (req, res) => {
     // Create a KPI
     const user = {
         username: req.body.username,
-        password: req.body.password,
         firstname: req.body.firstname,
         lastname: req.body.lastname,
         role: req.body.role,
@@ -55,7 +54,7 @@ exports.update = (req, res) => {
         "firstname": req.body.firstname,
         "lastname": req.body.lastname,
         "role": req.body.role,
-        "service": req.body.subrole == undefined ? '--' : req.body.subrole,
+        "service": req.body.service == undefined ? '--' : req.body.service,
     };
 
 
@@ -118,8 +117,6 @@ exports.delete = (req, res) => {
 exports.findOne = (req, res) => {
     const currentUser = req.user;
 
-    console.log(currentUser);
-
     const id = parseInt(req.params.id);
 
     if (id !== parseInt(currentUser.sub) && currentUser.role !== 'Admin') {
@@ -159,6 +156,8 @@ exports.authenticateUser = async (user) => {
 
 
     } catch {
+
+        //TODO
 
     }
 

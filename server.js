@@ -33,7 +33,7 @@ require('./app/routes/kpi.routes')(app); // KPI routes
 require('./app/routes/field.routes')(app); // Field routes
 require('./app/routes/register.routes')(app); // Register routes
 require('./app/routes/user.routes')(app);     // User routes
-//require('./app/routes/role.routes')(app);     // Role routes
+require('./app/routes/role.routes')(app);     // Role routes
 
 
 module.exports = app;

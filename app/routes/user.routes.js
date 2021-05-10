@@ -6,16 +6,13 @@ module.exports = app => {
     var router = require('express').Router();
   
     // Create a new USER
-    //router.post('/', authorize('Admin'), users.create);
+    router.post('/', authorize('Admin'), users.create);
 
     // Update an existing USER
     router.post('/update/:id', authorize(), users.update);
 
-    // Authenticate existing user
-    //router.post('/authenticate', users.authenticate);
-  
     // Retrieve all USERS
-    router.get('/', users.findAll);
+    router.get('/', authorize('Admin'), users.findAll);
   
     // Retrieve a single USER with id
     router.get('/:id', authorize(), users.findOne);

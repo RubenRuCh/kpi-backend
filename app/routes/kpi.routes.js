@@ -1,3 +1,5 @@
+const authorize = require('../helpers/authorize');
+
 module.exports = app => {
   const kpis = require('../controllers/kpi.controller.js');
 
@@ -7,7 +9,7 @@ module.exports = app => {
   router.post('/', kpis.create);
 
   // Retrieve all KPIs
-  router.get('/', kpis.findAll);
+  router.get('/', authorize('Admin'), kpis.findAll);
 
   // Retrieve all enabled KPIs
   router.get('/enabled', kpis.findAllEnabled);

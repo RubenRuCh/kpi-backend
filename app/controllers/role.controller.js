@@ -18,22 +18,22 @@ exports.findAllRoles = (req, res) => {
     });
 }
 
-exports.findAllSubroles = (req, res) => {
+exports.findAllservices = (req, res) => {
     ROL.findAll({
-        attributes: ['subrole'],
+        attributes: ['service'],
         where: {
-            subrole: {
+            service: {
                 [Op.ne]: '--',
             }
         },
-        group: ['subrole']
+        group: ['service']
     })
-    .then(subroles => {
-        res.status(200).send(subroles);
+    .then(services => {
+        res.status(200).send(services);
     })
     .catch(err => {
         res.status(500).send({
-            message: err.message || 'Some error ocurred while retrieving subroles'
+            message: err.message || 'Some error ocurred while retrieving services'
         });
     });
     

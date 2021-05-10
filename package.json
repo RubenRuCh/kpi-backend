@@ -16,7 +16,7 @@
     "test": "cross-env NODE_ENV=test jest --testTimeout=10000 --force-exit --silent --verbose",
     "pretest": "cross-env NODE_ENV=test npm run migrate:reset",
     "dev": "nodemon index.js",
-    "start": "node index.js"
+    "start": "nodemon index.js"
   },
   "repository": {
     "type": "git",
