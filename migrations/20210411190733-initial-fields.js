@@ -28,7 +28,7 @@ module.exports = {
         title: 'Servicio',
         description: 'Servicio del KPI',
         required: true,
-        type: 'text',
+        type: 'radio',
         values: ['Agua', 'Poblacion', 'Alumbrado'],
         maxlength: null,
         createdAt: new Date(),

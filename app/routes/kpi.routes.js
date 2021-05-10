@@ -9,7 +9,7 @@ module.exports = app => {
   router.post('/', kpis.create);
 
   // Retrieve all KPIs
-  router.get('/', authorize('Admin'), kpis.findAll);
+  router.get('/', kpis.findAll);
 
   // Retrieve all enabled KPIs
   router.get('/enabled', kpis.findAllEnabled);
