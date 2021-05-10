@@ -6,25 +6,25 @@ module.exports = app => {
   var router = require('express').Router();
 
   // Create a new KPI
-  router.post('/', kpis.create);
+  router.post('/', authorize('Admin'), kpis.create);
 
   // Retrieve all KPIs
-  router.get('/', kpis.findAll);
+  router.get('/', authorize(), kpis.findAll);
 
   // Retrieve all enabled KPIs
-  router.get('/enabled', kpis.findAllEnabled);
+  router.get('/enabled', authorize(), kpis.findAllEnabled);
 
   // Retrieve a single KPI with id
-  router.get('/:id', kpis.findOne);
+  router.get('/:id', authorize(), kpis.findOne);
 
   // Update a KPI with id
-  router.put('/:id', kpis.update);
+  router.put('/:id', authorize('Admin'), kpis.update);
 
   // Disable a KPI with id
-  router.put('/:id/disable', kpis.disable);
+  router.put('/:id/disable', authorize('Admin'), kpis.disable);
 
   // Enable a KPI with id
-  router.put('/:id/enable', kpis.enable);
+  router.put('/:id/enable', authorize('Admin'), kpis.enable);
 
   // // Delete a KPI with id
   // router.delete('/:id', kpis.delete);
