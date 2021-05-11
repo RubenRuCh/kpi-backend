@@ -18,9 +18,6 @@ module.exports = (app) => {
     // // Delete a Register with id
     router.delete('/:id', registers.delete);
   
-    // // Delete all KPI
-    // router.delete('/', registers.deleteAll);
-  
     app.use('/api/registers', router);
   };
   
