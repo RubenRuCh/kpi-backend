@@ -7,6 +7,8 @@ module.exports = app => {
 
     // Retrieve all roles
     router.get('/', authorize('Admin'), roles.findAllRoles);
+
+    // Retrieve all services
     router.get('/services', roles.findAllservices);
 
     app.use('/api/roles', router);

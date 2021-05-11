@@ -9,7 +9,6 @@ const Op = db.Sequelize.Op;
 // Create and Save a new USER
 exports.create = async (req, res) => {
 
-    // Create a KPI
     const user = {
         username: req.body.username,
         firstname: req.body.firstname,
@@ -18,7 +17,7 @@ exports.create = async (req, res) => {
         service: req.body.service,
     };
 
-    // Save KPI in the database
+    // Save USER in the database
     try {
         const createdUser = await USER.create(user);
 
@@ -30,9 +29,8 @@ exports.create = async (req, res) => {
     }
 };
 
+// Add a token to final USER info
 exports.createCurrentUser = (user) => {
-
-    delete user.password;
 
     const token = jwt.sign({ sub: user.id, role: user.role, service: user.service }, config.secret);
 
@@ -44,6 +42,7 @@ exports.createCurrentUser = (user) => {
 
 }
 
+// Update a current USER
 exports.update = (req, res) => {
 
     const id = req.params.id;
@@ -144,8 +143,6 @@ exports.findOne = (req, res) => {
 //Authenticate a user comparing DATA in DB
 exports.authenticateUser = async (user) => {
 
-    try {
-
         const userdata = await USER.findAll({
             where: { username: user }
         })
@@ -153,15 +150,6 @@ exports.authenticateUser = async (user) => {
         const userFinal = this.createCurrentUser(userdata[0].toJSON());
 
         return userFinal
-
-
-    } catch {
-
-        //TODO
-
-    }
-
-
 
 }
 

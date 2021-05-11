@@ -1,5 +1,7 @@
 const db = require('../../models');
+const ROL = db.roles;
 const Conf = db.conf;
+const Field = db.fields;
 const Op = db.Sequelize.Op;
 
 // Retrieve all conf parameters from the database
@@ -21,15 +23,34 @@ exports.findAll = (req, res) => {
 };
 
 // Update a conf parameter by the id in the request
-exports.update = (req, res) => {
+exports.update = async (req, res) => {
   const id = req.params.id;
+
+  const arrayValues = [];
+
+  const values = await ROL.findAll({ attributes: ['service'], where: { service: { [Op.ne]: '--', } }, group: ['service'] });
+
+  for (let i in values) {
+
+    arrayValues.push(values[i].service);
+
+  }
 
   // Update conf parameter
   const conf = {
     value: req.body.value
   };
 
-  Conf.update(conf, {
+  const field = {
+    values: arrayValues
+  }
+
+  await Field.update(field, {
+    where: { title: 'Servicio' }
+  });
+    
+
+  await Conf.update(conf, {
     where: { id: id }
   })
     .then(num => {
