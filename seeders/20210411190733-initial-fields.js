@@ -1,10 +1,9 @@
 'use strict';
 
+
 const db = require('../models/index.js');
 const Op = db.Sequelize.Op;
 const ROL = db.roles;
-
-
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
@@ -40,6 +39,7 @@ module.exports = {
         updatedAt: new Date()
       }
     ]);
+
 
     // Insert all services obtained from roles table in DB
     return await queryInterface.bulkInsert('fields', [

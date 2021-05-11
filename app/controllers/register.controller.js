@@ -5,6 +5,7 @@ const Op = db.Sequelize.Op;
 
 // Create and Save a new Register
 exports.create = async (req, res) => {
+
   // Validate request
   if (!req.body.value) {
     res.status(400).send({
@@ -24,10 +25,7 @@ exports.create = async (req, res) => {
   // Save Register in the database
   try {
     const createdRegister = await Register.create(register);
-
-    /* console.log(Register.prototype); */
     createdRegister.setKpi_fields(registerValues);
-
     res.status(201).send(createdRegister);
   } catch (err) {
     res.status(500).send({
@@ -46,7 +44,6 @@ exports.findAll = (req, res) => {
     include: [
       {
         model: KpiField,
-        // include: [{ model: Field, where: { fillable: true } }],
       },
     ],
     where: condition,
@@ -143,23 +140,7 @@ exports.delete = (req, res) => {
     });
 };
 
-// Delete all Registers from the database.
-// exports.deleteAll = (req, res) => {
-//   Register.destroy({
-//     where: {},
-//     truncate: false,
-//   })
-//     .then((nums) => {
-//       res.send({ message: `${nums} Register were deleted successfully!` });
-//     })
-//     .catch((err) => {
-//       res.status(500).send({
-//         message: err.message || 'Some error occurred while removing all kpis.',
-//       });
-//     });
-// };
-
-// tabla intermedia
+    // Middle table
 const updateRegisterValues = async (req) => {
   // Get all kpi_fields that we wanna include in this Register
   const requestedColumns = req.body.columns;

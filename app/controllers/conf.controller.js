@@ -1,4 +1,5 @@
 const db = require('../../models');
+
 const ROL = db.roles;
 const Conf = db.conf;
 const Field = db.fields;
