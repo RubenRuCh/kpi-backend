@@ -20,12 +20,15 @@ exports.login = async (req, res) => {
       url: ldapConfig.URL
       // tlsOptions: { rejectUnauthorized: false }
     },
-    rootdn: `cn=${ldapConfig.ADMIN},${ldapConfig.DC}`,
-    rootpw: ldapConfig.ADMIN_PASSWD,
+    //adminDn: `cn=${ldapConfig.ADMIN},${ldapConfig.DC}`,
+    //adminPassword: ldapConfig.ADMIN_PASSWD,
+    //userDn: `${ldapConfig.SEARCH_BY}=${req.body.user},${ldapConfig.DC}`,
+    //rootdn: `cn=${ldapConfig.ADMIN},${ldapConfig.DC}`,
+    //rootpw: ldapConfig.ADMIN_PASSWD,
     userDn: `${ldapConfig.SEARCH_BY}=${req.body.user},ou=${ldapConfig.ou},${ldapConfig.DC}`,
     userPassword: req.body.password,
-    userSearchBase: `${ldapConfig.DC}`,
-    usernameAttribute: ldapConfig.SEARCH_BY,
+    //userSearchBase: `${ldapConfig.DC}`,
+    //usernameAttribute: ldapConfig.SEARCH_BY,
     username: req.body.user
     // starttls: false
   };
@@ -34,12 +37,12 @@ exports.login = async (req, res) => {
   try {
     const user = await authenticate(options);
 
+    // User formated with some important info + token
     const returnfromDB = await userController.authenticateUser(user.uid);
   
     res.status(200).send(returnfromDB);
   } catch (err) {
 
-    console.log("NO VA");
     res.status(401).send({
       message: err.message || 'Error' 
     });

@@ -28,6 +28,7 @@ exports.update = async (req, res) => {
 
   const arrayValues = [];
 
+  //Update 
   const values = await ROL.findAll({ attributes: ['service'], where: { service: { [Op.ne]: '--', } }, group: ['service'] });
 
   for (let i in values) {
