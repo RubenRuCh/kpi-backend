@@ -42,4 +42,9 @@ db.registerValues = require('./register_values.model.js')(sequelize, Sequelize);
 db.registers.belongsToMany(db.kpiFields, { through: db.registerValues }); // registerId
 db.kpiFields.belongsToMany(db.registers, { through: db.registerValues }); // kpiFieldId
 
+// Users
+db.users = require('./user.model.js')(sequelize, Sequelize);
+
+//Roles
+db.roles = require('./role.model.js')(sequelize, Sequelize);
 module.exports = db;
