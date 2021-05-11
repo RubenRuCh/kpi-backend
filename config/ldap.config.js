@@ -1,8 +1,6 @@
 module.exports = {
-  URL: 'ldap://localhost:389',
-  DC: 'dc=maxcrc,dc=com',
-  ADMIN: 'Manager',
-  ADMIN_PASSWD: 'secret',
-  SEARCH_BY: 'uid',
-  ou: 'users',
+  URL: 'ldap://172.23.97.181:389',
+  DC: 'dc=rruger,dc=dev',
+  GROUP: 'Users',
+  SEARCH_BY: 'uid'
 };
