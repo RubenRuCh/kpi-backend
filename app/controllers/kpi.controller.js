@@ -1,5 +1,5 @@
 
-const { sequelize } = require('../../models');
+const { sequelize } = require('@/models');
 const db = require('../../models');
 const KPI = db.kpis;
 const Field = db.fields;
