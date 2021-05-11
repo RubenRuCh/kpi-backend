@@ -17,13 +17,11 @@ exports.login = async (req, res) => {
       url: ldapConfig.URL
       // tlsOptions: { rejectUnauthorized: false }
     },
-    adminDn: `cn=${ldapConfig.ADMIN},${ldapConfig.DC}`,
-    adminPassword: ldapConfig.ADMIN_PASSWD,
-    userDn: `${ldapConfig.SEARCH_BY}=${req.body.user},${ldapConfig.DC}`,
-    userPassword: req.body.password,
+    userDn: `cn=${req.body.user},ou=${ldapConfig.GROUP},${ldapConfig.DC}`,
+    userPassword: `${req.body.password}`,
     userSearchBase: `${ldapConfig.DC}`,
     usernameAttribute: ldapConfig.SEARCH_BY,
-    username: req.body.user
+    username: `${req.body.user}`
     // starttls: false
   };
 
