@@ -18,6 +18,9 @@ const db = {};
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
+// Conf
+db.conf = require('./conf.model.js')(sequelize, Sequelize);
+
 // KPI
 db.kpis = require('./kpi.model.js')(sequelize, Sequelize);
 
