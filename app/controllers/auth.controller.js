@@ -1,8 +1,11 @@
 const { authenticate } = require('ldap-authentication');
 const ldapConfig = require('../../config/ldap.config.js');
 
+const userController = require('./user.controller.js');
+
 // Try to login using LDAP
 exports.login = async (req, res) => {
+
   // Validate request
   if (!req.body.user || !req.body.password) {
     res.status(400).send({
@@ -28,10 +31,15 @@ exports.login = async (req, res) => {
   // Connect to LDAP service and return result
   try {
     const user = await authenticate(options);
-    res.status(200).send(user);
+
+    // User formated with some important info + token
+    const returnfromDB = await userController.authenticateUser(user.uid);
+  
+    res.status(200).send(returnfromDB);
   } catch (err) {
+
     res.status(401).send({
-      message: err.message || 'Some error occurred while login with LDAP'
+      message: err.message || 'Error' 
     });
   }
 };
