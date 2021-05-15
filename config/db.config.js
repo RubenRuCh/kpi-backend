@@ -1,7 +1,7 @@
 module.exports = {
   HOST: 'localhost',
   USER: 'postgres',
-  PASSWORD: '1234',
+  PASSWORD: '123456',
   DB:
     process.env.NODE_ENV == 'production'
       ? 'kpis_management_production'

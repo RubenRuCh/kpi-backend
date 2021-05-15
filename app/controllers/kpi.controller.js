@@ -1,10 +1,7 @@
-
-const { sequelize } = require('@/models');
 const db = require('../../models');
 const KPI = db.kpis;
 const Field = db.fields;
 const Op = db.Sequelize.Op;
-
 
 // Create and Save a new KPI
 exports.create = async (req, res) => {
@@ -41,36 +38,36 @@ exports.create = async (req, res) => {
 
 // Retrieve all KPIs from the database
 exports.findAll = (req, res) => {
-
   //User information from Token
   const currentUser = req.user;
 
   //User subrole or service to which belongs
-  const userService = currentUser.service;
-  
+  const userService = currentUser?.service;
+
   const title = req.query.title;
 
   var condition = title ? { title: { [Op.iLike]: `%${title}%` } } : null;
 
   KPI.findAll({ include: [{ model: Field }], where: condition })
     .then(data => {
-
       //Filter KPIs if current user hasn't Admin Profile
-      if (currentUser.role == 'Admin') {
-
+      if (
+        currentUser?.role == 'Admin' ||
+        process.env.NODE_ENV != 'production'
+      ) {
         res.status(200).send(data);
       } else {
-
-        data = data.filter((kpi) => {
-
-          const field = kpi.fields.find((field) => {return field.title == 'Servicio' && field.kpi_field.value == userService});
+        data = data.filter(kpi => {
+          const field = kpi.fields.find(field => {
+            return (
+              field.title == 'Servicio' && field.kpi_field.value == userService
+            );
+          });
           return field;
-        
-            })
+        });
 
         res.status(200).send(data);
       }
-
     })
     .catch(err => {
       res.status(500).send({
@@ -264,4 +261,3 @@ const updateKPIFields = async req => {
 
   return fields;
 };
-
