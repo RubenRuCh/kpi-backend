@@ -4,3 +4,4 @@ module.exports = {
   GROUP: 'Users',
   SEARCH_BY: 'uid'
 };
+
