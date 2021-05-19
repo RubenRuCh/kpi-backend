@@ -1,3 +1,5 @@
+config/ldap.config.js
+
 # Logs
 logs
 *.log

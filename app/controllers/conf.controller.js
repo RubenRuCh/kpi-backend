@@ -1,4 +1,5 @@
 const db = require('../../models');
+
 const ROL = db.roles;
 const Conf = db.conf;
 const Field = db.fields;
@@ -28,6 +29,7 @@ exports.update = async (req, res) => {
 
   const arrayValues = [];
 
+  //Update 
   const values = await ROL.findAll({ attributes: ['service'], where: { service: { [Op.ne]: '--', } }, group: ['service'] });
 
   for (let i in values) {
