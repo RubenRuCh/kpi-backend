@@ -5,7 +5,7 @@ const db = require('./models');
 const app = express();
 
 var corsOptions = {
-  origin: 'http://localhost:8081'
+  origin: 'http://localhost:8080'
 };
 
 app.use(cors(corsOptions));
@@ -33,8 +33,7 @@ require('./app/routes/auth.routes')(app); // Auth routes
 require('./app/routes/kpi.routes')(app); // KPI routes
 require('./app/routes/field.routes')(app); // Field routes
 require('./app/routes/register.routes')(app); // Register routes
-require('./app/routes/user.routes')(app);     // User routes
-require('./app/routes/role.routes')(app);     // Role routes
-
+require('./app/routes/user.routes')(app); // User routes
+require('./app/routes/role.routes')(app); // Role routes
 
 module.exports = app;
