@@ -1,10 +1,9 @@
 'use strict';
 
-const { Sequelize } = require("sequelize");
+const { Sequelize } = require('sequelize');
 
 module.exports = {
-
-  up: async(queryInterface, Sequelize) => {
+  up: async (queryInterface, Sequelize) => {
     return await queryInterface.bulkInsert('users', [
       {
         username: 'carlos',
@@ -13,7 +12,7 @@ module.exports = {
         role: 'Admin',
         service: '--',
         createdAt: new Date(),
-        updatedAt: new Date(),
+        updatedAt: new Date()
       },
       {
         username: 'valentin',
@@ -22,9 +21,18 @@ module.exports = {
         role: 'Servicio',
         service: 'Agua',
         createdAt: new Date(),
-        updatedAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        username: 'ruben',
+        firstname: 'Rubén',
+        lastname: 'Rüger Chambra',
+        role: 'Admin',
+        service: '--',
+        createdAt: new Date(),
+        updatedAt: new Date()
       }
-    ])
+    ]);
   },
 
   down: async (queryInterface, Sequelize) => {
@@ -35,6 +43,5 @@ module.exports = {
      * await queryInterface.bulkDelete('People', null, {});
      */
     return await queryInterface.bulkDelete('users', null, {});
-  },
-
+  }
 };

@@ -12,7 +12,7 @@ function authorize(roles = []) {
     roles = [roles];
   }
   // Allow development without requiring authentication
-  if (process.env.NODE_ENV != 'production') return [];
+  // if (process.env.NODE_ENV != 'production') return [];
 
   return [
     // authenticate JWT token and attach user to request object (req.user)

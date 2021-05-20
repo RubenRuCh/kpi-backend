@@ -33,9 +33,7 @@ exports.login = async (req, res) => {
     let returnfromDB = user;
 
     // User formated with some important info + token
-    if (process.env.NODE_ENV == 'production') {
-      returnfromDB = await userController.authenticateUser(user.uid);
-    }
+    returnfromDB = await userController.authenticateUser(user.uid);
 
     res.status(200).send(returnfromDB);
   } catch (err) {

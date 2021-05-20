@@ -51,10 +51,7 @@ exports.findAll = (req, res) => {
   KPI.findAll({ include: [{ model: Field }], where: condition })
     .then(data => {
       //Filter KPIs if current user hasn't Admin Profile
-      if (
-        currentUser?.role == 'Admin' ||
-        process.env.NODE_ENV != 'production'
-      ) {
+      if (currentUser?.role == 'Admin') {
         res.status(200).send(data);
       } else {
         data = data.filter(kpi => {
