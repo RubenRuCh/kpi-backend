@@ -77,11 +77,41 @@ exports.findAll = (req, res) => {
 exports.findOne = (req, res) => {
   const id = req.params.id;
 
+  //User information from Token
+  const currentUser = req.user;
+
+  //User subrole or service to which belongs
+  const userService = currentUser?.service;
+
   KPI.findByPk(id, {
     include: [{ model: Field }]
   })
     .then(data => {
-      res.status(200).send(data);
+
+      if (currentUser?.role == 'Admin') {
+
+        res.status(200).send(data);
+
+      } else {
+
+        let inArray = [data];
+
+        inArray = inArray.filter(kpi => {
+          const field = kpi.fields.find(field => {
+            return field.title == 'Servicio' && field.kpi_field.value == userService
+            
+          });
+
+          return field;
+        });
+
+        if (inArray.length) {
+          res.status(200).send(data);
+        } else {
+          res.status(401).send({ message: 'Unauthorized' });
+        }
+      }
+
     })
     .catch(err => {
       res.status(500).send({
