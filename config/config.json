@@ -3,21 +3,21 @@
     "username": "postgres",
     "password": "123456",
     "database": "kpis_management_dev",
-    "host": "localhost",
+    "host": "postgres",
     "dialect": "postgres"
   },
   "test": {
     "username": "postgres",
     "password": "123456",
     "database": "kpis_management_test",
-    "host": "localhost",
+    "host": "postgres",
     "dialect": "postgres"
   },
   "production": {
     "username": "postgres",
     "password": "123456",
     "database": "kpis_management_production",
-    "host": "localhost",
+    "host": "postgres",
     "dialect": "postgres"
   }
 }
