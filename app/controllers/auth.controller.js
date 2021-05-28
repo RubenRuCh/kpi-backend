@@ -19,11 +19,17 @@ exports.login = async (req, res) => {
       url: ldapConfig.URL
       // tlsOptions: { rejectUnauthorized: false }
     },
+
+    //cn o uid -> en funcion del RDN aplicado
     userDn: `cn=${req.body.user},ou=${ldapConfig.GROUP},${ldapConfig.DC}`,
     userPassword: `${req.body.password}`,
-    userSearchBase: `${ldapConfig.DC}`,
-    usernameAttribute: ldapConfig.SEARCH_BY,
-    username: `${req.body.user}`
+
+    //Parametros necesarios en caso de querer devolver toda la informacion del usuario almacenada en LDAP
+    //Actualmente devuelve true si log in es correcto, no se necesita el resto de informacion
+
+    //userSearchBase: `${ldapConfig.DC}`,
+    //usernameAttribute: ldapConfig.SEARCH_BY,
+    //username: `${req.body.user}`
     // starttls: false
   };
 
@@ -33,7 +39,7 @@ exports.login = async (req, res) => {
     let returnfromDB = user;
 
     // User formated with some important info + token
-    returnfromDB = await userController.authenticateUser(user.uid);
+    returnfromDB = await userController.authenticateUser(req.body.user);
 
     res.status(200).send(returnfromDB);
   } catch (err) {
