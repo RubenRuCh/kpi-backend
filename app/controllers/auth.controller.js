@@ -8,7 +8,7 @@ exports.login = async (req, res) => {
   // Validate request
   if (!req.body.user || !req.body.password) {
     res.status(400).send({
-      message: 'Content cannot be empty!'
+      message: 'Content cannot be empty!',
     });
     return;
   }
@@ -16,12 +16,12 @@ exports.login = async (req, res) => {
   // Create a options object
   const options = {
     ldapOpts: {
-      url: ldapConfig.URL
+      url: ldapConfig.URL,
       // tlsOptions: { rejectUnauthorized: false }
     },
 
     //cn o uid -> en funcion del RDN aplicado
-    userDn: `cn=${req.body.user},ou=${ldapConfig.GROUP},${ldapConfig.DC}`,
+    userDn: `${ldapConfig.SEARCH_BY}=${req.body.user},ou=${ldapConfig.GROUP},${ldapConfig.DC}`,
     userPassword: `${req.body.password}`,
 
     //Parametros necesarios en caso de querer devolver toda la informacion del usuario almacenada en LDAP
@@ -44,7 +44,7 @@ exports.login = async (req, res) => {
     res.status(200).send(returnfromDB);
   } catch (err) {
     res.status(401).send({
-      message: err.message || 'Error'
+      message: err.message || 'Error',
     });
   }
 };
