@@ -40,7 +40,7 @@ exports.login = async (req, res) => {
     // let returnfromDB = user;
 
     // User formated with some important info + token
-    let returnfromDB = await userController.authenticateUser(req.body.user);
+    let returnfromDB = await userController.authenticateUser(req.body.user, req.body.password);
 
     res.status(200).send(returnfromDB);
   } catch (err) {

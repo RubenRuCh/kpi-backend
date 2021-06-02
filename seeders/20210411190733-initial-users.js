@@ -7,6 +7,7 @@ module.exports = {
     return await queryInterface.bulkInsert('users', [
       {
         username: 'carlos',
+        password: '1234',
         firstname: 'Carlos',
         lastname: 'Tarrazona',
         role: 'Admin',
@@ -16,6 +17,7 @@ module.exports = {
       },
       {
         username: 'carlos_servicio',
+        password: '1234',
         firstname: 'Carlos de Servicio',
         lastname: 'Tarrazona Valderrama',
         role: 'Servicio',
@@ -25,6 +27,7 @@ module.exports = {
       },
       {
         username: 'raul',
+        password: '1234',
         firstname: 'Raul',
         lastname: 'Oriol',
         role: 'Admin',
@@ -34,6 +37,7 @@ module.exports = {
       },
       {
         username: 'ruben',
+        password: '1234',
         firstname: 'Rubén',
         lastname: 'Rüger Chambra',
         role: 'Admin',
