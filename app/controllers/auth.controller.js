@@ -44,7 +44,6 @@ exports.login = async (req, res) => {
 
     res.status(200).send(returnfromDB);
   } catch (err) {
-    console.log('ERROR LDAP', err);
     res.status(401).send({
       message: err.message || 'Error',
     });
