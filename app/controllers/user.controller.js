@@ -138,15 +138,12 @@ exports.findOne = (req, res) => {
 };
 
 //Authenticate a user comparing DATA in DB
-exports.authenticateUser = async (user,passwd) => {
+exports.authenticateUser = async user => {
   const userdata = await USER.findAll({
-    where: { [Op.and]: [
-      {username: user},
-      {password: passwd}
-    ] }
+    where: { username: user }
   });
 
-  const userFinal = this.createCurrentUser(userdata[0].toJSON());
+  const userFinal = this.createCurrentUser(userdata[0]?.toJSON());
 
   return userFinal;
 };

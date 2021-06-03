@@ -36,14 +36,11 @@ exports.login = async (req, res) => {
   // Connect to LDAP service and return result
   try {
     // TODO Make compatible with Docker
-    // const user = await authenticate(options);
-    // let returnfromDB = user;
+    const user = await authenticate(options);
+    let returnfromDB = user;
 
     // User formated with some important info + token
-    let returnfromDB = await userController.authenticateUser(
-      req.body.user,
-      req.body.password
-    );
+    let returnfromDB = await userController.authenticateUser(req.body.user);
 
     res.status(200).send(returnfromDB);
   } catch (err) {
