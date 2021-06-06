@@ -5,10 +5,12 @@ KPIs a l’Ajuntament de València (backend)
 ```
 docker-compose up -D
 ```
+
 ## Project setup
 ```
 npm install
 ```
+
 ## Starts service
 ```
 npm run start
