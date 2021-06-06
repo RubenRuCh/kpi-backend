@@ -1,6 +1,11 @@
 # Gestion de Indicadores (KPIs)
 KPIs a l’Ajuntament de València (backend)
 
+## Config
+```
+Different configuration options can be found inside "config" folder.
+```
+
 ## Deploy with Docker
 ```
 docker-compose up -D
