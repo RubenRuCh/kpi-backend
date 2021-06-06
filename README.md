@@ -9,32 +9,32 @@ docker-compose up -D
 ```
 npm install
 ```
-### Starts service
+## Starts service
 ```
 npm run start
 ```
 
-### Starts service with hot-reloads for development
+## Starts service with hot-reloads for development
 ```
 npm run dev
 ```
 
-### Run seeders
+## Run seeders
 ```
 npm run seed
 ```
 
-### Run migrations
+## Run migrations
 ```
 npm run migrate
 ```
 
-### Run migrations with reset
+## Run migrations with reset
 ```
 npm run migrate:reset
 ```
 
-### Execute tests
+## Execute tests
 ```
 npm run test
 ```
